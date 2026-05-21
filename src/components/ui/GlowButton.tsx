@@ -11,7 +11,13 @@ type Props = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const base =
-  "relative inline-flex items-center justify-center gap-2 rounded-xl font-semibold text-sm px-6 py-3 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none";
+  "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl font-semibold text-sm px-6 py-3 transition-all duration-300 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none";
+
+const Shine = () => (
+  <span className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-xl">
+    <span className="absolute inset-y-0 left-0 w-1/3 -translate-x-[120%] bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:[animation:shine-sweep_0.9s_ease]" />
+  </span>
+);
 
 const styles: Record<Variant, string> = {
   primary:
@@ -31,7 +37,12 @@ export function GlowButton({
   ...rest
 }: Props) {
   const cls = `${base} ${styles[variant]} ${full ? "w-full" : ""} ${className}`;
-  const content = <span className="relative z-10 inline-flex items-center gap-2">{children}</span>;
+  const content = (
+    <>
+      <Shine />
+      <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
+    </>
+  );
 
   if (href) {
     const external = href.startsWith("http");

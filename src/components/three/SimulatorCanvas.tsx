@@ -164,7 +164,16 @@ export function SimulatorCanvas() {
           shadows={quality === "high"}
           dpr={quality === "high" ? [1, 2] : 1}
           camera={{ position: [0, 6, 9], fov: 50 }}
+          gl={{ powerPreference: "high-performance", antialias: quality === "high", failIfMajorPerformanceCaveat: false }}
           onClick={() => setActive(true)}
+          onCreated={({ gl }) => {
+            // Prevent a permanent black/grey canvas if the GPU context drops.
+            gl.domElement.addEventListener(
+              "webglcontextlost",
+              (e) => e.preventDefault(),
+              false
+            );
+          }}
         >
           <Suspense fallback={null}>
             <Scene controller={controller} quality={quality} />

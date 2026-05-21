@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Registered so the conic-gradient angle can animate (glass-ring border). */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  60%,
+  100% {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+
+@keyframes grad-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 /* ─── Theme tokens (dark default / light override) ─── */
 :root {
   --bg: #06080f;
@@ -78,24 +111,72 @@ html.light {
 
 @layer components {
   .glass {
+    position: relative;
     background: var(--bg-card);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    backdrop-filter: blur(26px) saturate(180%);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s;
+    border-radius: 22px;
+    /* outer depth + soft inner top highlight for real glass feel */
+    box-shadow: var(--shadow), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    transition: border-color 0.4s, background 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  /* Thin specular highlight along the top edge */
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    opacity: 0.7;
+    pointer-events: none;
   }
   .glass-hover:hover {
     border-color: var(--border-h);
     background: var(--bg-card-h);
+    box-shadow: var(--shadow), inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 0 0 1px rgba(129, 140, 248, 0.08);
+  }
+  /* Animated gradient border ring (futuristic accent on hover) */
+  .glass-ring {
+    position: relative;
+  }
+  .glass-ring::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(from var(--angle, 0deg), transparent 60%, rgba(129, 140, 248, 0.7), rgba(240, 171, 252, 0.7), transparent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .glass-ring:hover::after {
+    opacity: 1;
+    animation: spin-border 4s linear infinite;
   }
   .text-gradient {
-    background: linear-gradient(135deg, var(--accent), #a78bfa, #f0abfc);
+    background: linear-gradient(135deg, var(--accent), #a78bfa, #f0abfc, var(--accent));
+    background-size: 220% 220%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    animation: grad-pan 8s ease infinite;
+  }
+  /* Subtle film grain for depth (sits over the background layer). */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   .section-eyebrow {
     @apply text-xs font-semibold uppercase tracking-[0.2em];

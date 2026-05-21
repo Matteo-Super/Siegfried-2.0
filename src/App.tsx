@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Background } from "./components/ui/Background";
+import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
@@ -42,8 +43,10 @@ export default function App() {
   return (
     <>
       <Background />
+      <div className="grain" aria-hidden />
+      <ScrollProgress />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Features />
         <Simulation />

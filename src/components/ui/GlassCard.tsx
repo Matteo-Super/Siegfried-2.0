@@ -36,7 +36,7 @@ export function GlassCard({ children, className = "", tilt = false, id }: Props)
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className={`glass glass-hover relative overflow-hidden ${className}`}
+      className={`glass glass-hover glass-ring relative overflow-hidden ${className}`}
       style={
         tilt
           ? {
