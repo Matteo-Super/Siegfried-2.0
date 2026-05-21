@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siegfried 2.0 — Autonome Robotik-Plattform</title>
+  <meta name="description" content="Siegfried 2.0 — die offene Arduino-Plattform für autonomes Fahren. Bausatz für 99 €.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+  <!-- Ambient blobs behind everything -->
+  <div class="ambient">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <!-- Nav -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <span class="brand-dot"></span>
+        <span>Siegfried 2.0</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#gallery">Galerie</a>
+        <a href="#simulator">Simulator</a>
+        <a href="#product">Bausatz</a>
+      </div>
+      <button class="theme-btn" id="theme-btn" aria-label="Theme umschalten">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="hero-eyebrow reveal">Open Source. Everything.</p>
+        <h1 class="reveal reveal-d1">Siegfried 2.0<br><span class="gradient-text">More Speed. Faster. Better.</span></h1>
+        <p class="hero-desc reveal reveal-d2">Siegfried 2.0 ist eine modulare Arduino-Plattform, die Sensorik, Motorik und intelligente Ausweichlogik in einem eleganten Bausatz vereint.</p>
+        <div class="hero-actions reveal reveal-d3">
+          <a href="#product" class="btn-primary">Bausatz für 99 €</a>
+          <a href="#simulator" class="btn-ghost">Simulator testen</a>
+        </div>
+      </div>
+      <div class="hero-image reveal reveal-d2">
+        <div class="glass-frame">
+          <img src="siegfried.jpg" alt="Siegfried 2.0 Arduino Car" id="hero-photo">
+          <div class="frame-shine"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="section-wrap">
+      <h2 class="section-title reveal">Was Siegfried besonders macht</h2>
+      <div class="features-grid">
+        <div class="feature-card glass reveal">
+          <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
+          <h3>Arduino Uno R3</h3>
+          <p>ATmega328P Mikrocontroller als Herzstück. Vollständig programmierbar über die Arduino IDE.</p>
+        </div>
+        <div class="feature-card glass reveal reveal-d1">
+          <div class="feature-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+          <h3>HC-SR04 Ultraschall</h3>
+          <p>Präzise Entfernungsmessung bis 4 Meter. Hinderniserkennung in Echtzeit mit Servo-Schwenk.</p>
+        </div>
+        <div class="feature-card glass reveal reveal-d2">
+          <div class="feature-icon"><i class="fa-solid fa-car-side"></i></div>
+          <h3>4WD Antrieb</h3>
+          <p>Vier Getriebemotoren an einer L298N H-Brücke. Drift-fähig und kraftvoll genug für jedes Terrain.</p>
+        </div>
+        <div class="feature-card glass reveal reveal-d3">
+          <div class="feature-icon"><i class="fa-solid fa-bluetooth-b"></i></div>
+          <h3>Bluetooth HC-05</h3>
+          <p>Fernsteuerung per Smartphone-App. Sende Befehle drahtlos und steuere Siegfried in Echtzeit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section id="gallery" class="gallery">
+    <div class="section-wrap">
+      <h2 class="section-title reveal">Siegfried 2.0 Impressionen</h2>
+      <p class="section-sub reveal reveal-d1">Originalaufnahmen der Hardware und des Aufbaus der autonomen Plattform.</p>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item glass reveal">
+          <img src="auto_pic1.jpg" alt="Siegfried 2.0 Nahaufnahme">
+        </div>
+        <div class="gallery-item glass reveal reveal-d1">
+          <img src="auto_pic2.jpg" alt="Siegfried 2.0 Seitenansicht">
+        </div>
+        <div class="gallery-item glass reveal reveal-d2">
+          <img src="auto_pic3.jpg" alt="Siegfried 2.0 Front">
+        </div>
+        <div class="gallery-item glass reveal reveal-d3">
+          <img src="auto_pic4.jpg" alt="Siegfried 2.0 Vogelperspektive">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulator -->
+  <section id="simulator" class="simulator">
+    <div class="section-wrap">
+      <h2 class="section-title reveal">Drift-Simulator</h2>
+      <p class="section-sub reveal reveal-d1">Erlebe die Fahrphysik von Siegfried direkt im Browser. Klicke in den Simulator und steuere mit W A S D.</p>
+
+      <div class="sim-layout">
+        <!-- Telemetry -->
+        <div class="glass sim-telemetry reveal">
+          <div class="sim-mode-row">
+            <button class="mode-btn active" id="mode-manual">Manuell</button>
+            <button class="mode-btn" id="mode-auto">Autopilot</button>
+          </div>
+          <div class="telem-grid">
+            <div class="telem-item">
+              <span class="telem-label">Speed</span>
+              <span class="telem-val" id="t-speed">0 cm/s</span>
+            </div>
+            <div class="telem-item">
+              <span class="telem-label">Sensor</span>
+              <span class="telem-val" id="t-dist">—</span>
+            </div>
+            <div class="telem-item">
+              <span class="telem-label">Batterie</span>
+              <span class="telem-val" id="t-batt">7.8 V</span>
+            </div>
+            <div class="telem-item">
+              <span class="telem-label">Status</span>
+              <span class="telem-val" id="t-status">Ready</span>
+            </div>
+          </div>
+          <div class="dpad">
+            <button class="dpad-b" id="d-up"><i class="fa-solid fa-chevron-up"></i></button>
+            <div class="dpad-row">
+              <button class="dpad-b" id="d-left"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="dpad-b dpad-stop" id="d-stop"><i class="fa-solid fa-stop"></i></button>
+              <button class="dpad-b" id="d-right"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <button class="dpad-b" id="d-down"><i class="fa-solid fa-chevron-down"></i></button>
+          </div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="glass sim-screen reveal reveal-d1">
+          <div class="sim-canvas-wrap">
+            <canvas id="sim-canvas" width="640" height="420" tabindex="0"></canvas>
+            <div class="sim-overlay" id="sim-overlay">
+              <span class="sim-overlay-text">Klicke zum Steuern</span>
+              <div class="key-hints">
+                <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Firmware Code -->
+  <section id="firmware" class="firmware">
+    <div class="section-wrap">
+      <h2 class="section-title reveal">Open Source. Everything.</h2>
+      <p class="section-sub reveal reveal-d1">Hier ist der vollständige Steuerungs-Code für deinen Arduino Uno R3. Kopieren, hochladen und loslegen.</p>
+      
+      <div class="glass code-card reveal">
+        <div class="code-header">
+          <span class="code-title"><i class="fa-solid fa-code"></i> siegfried_firmware.ino</span>
+          <button class="copy-btn" id="copy-btn" aria-label="Code kopieren">
+            <i class="fa-regular fa-copy"></i> Copy Code
+          </button>
+        </div>
+        <div class="code-body">
+          <pre><code id="firmware-code"></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product / Pricing -->
+  <section id="product" class="product">
+    <div class="section-wrap">
+      <div class="product-card glass reveal">
+        <div class="product-left">
+          <p class="product-eyebrow">Komplettpaket</p>
+          <h2>Siegfried 2.0 Bausatz</h2>
+          <p class="product-desc">Alles was du brauchst in einer Box: Chassis, Arduino Uno, Motoren, Sensoren, Bluetooth-Modul, Akkus und umfangreiche Anleitung. Auspacken, zusammenbauen, losfahren.</p>
+          <ul class="product-list">
+            <li><i class="fa-solid fa-check"></i> 4WD Anodisiertes Acryl-Chassis</li>
+            <li><i class="fa-solid fa-check"></i> Arduino Uno R3 + USB-Kabel</li>
+            <li><i class="fa-solid fa-check"></i> L298N Motortreiber</li>
+            <li><i class="fa-solid fa-check"></i> HC-SR04 Ultraschall + SG90 Servo</li>
+            <li><i class="fa-solid fa-check"></i> HC-05 Bluetooth Modul</li>
+            <li><i class="fa-solid fa-check"></i> 2× 18650 Li-Ion Akkus + Halterung</li>
+            <li><i class="fa-solid fa-check"></i> Vollständige Firmware (3 Modi)</li>
+            <li><i class="fa-solid fa-check"></i> Gedruckte Schritt-für-Schritt-Anleitung</li>
+          </ul>
+        </div>
+        <div class="product-right">
+          <div class="price-block">
+            <span class="price-tag">99 €</span>
+            <span class="price-note">inkl. Versand innerhalb der EU</span>
+          </div>
+          <button class="btn-primary btn-large">Jetzt bestellen</button>
+          <p class="guarantee"><i class="fa-solid fa-shield-halved"></i> 30 Tage Geld-zurück-Garantie</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="section-wrap footer-inner">
+      <span class="footer-brand">Siegfried 2.0</span>
+      <span class="footer-copy">© 2026 — Open Source Robotik-Plattform</span>
+    </div>
+  </footer>
+
+  <script src="app.js?v=2"></script>
+</body>
+</html>
