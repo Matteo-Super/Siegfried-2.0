@@ -1,0 +1,19 @@
+rules_version = '2';
+
+// Siegfried 2.0 Firestore rules.
+// Each authenticated user can read/write only their own profile document.
+// The `premium` flag is set client-side after a successful Stripe redirect
+// (lightweight unlock for a €0.99 product). For fraud-proof entitlement,
+// lock `premium` here and grant it from a Cloud Function + Stripe webhook
+// instead (requires the Blaze plan). See docs/STRIPE_SETUP.md.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.uid == uid;
+      allow delete: if false;
+    }
+  }
+}

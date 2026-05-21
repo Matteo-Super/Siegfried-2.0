@@ -1,7 +1,11 @@
 node_modules/
+dist/
+*.tsbuildinfo
 .firebase/
 firebase-debug.log
 .gemini/
 *.log
 .env
+.env.local
 .firebaserc
+.DS_Store
